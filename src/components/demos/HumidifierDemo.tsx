@@ -21,7 +21,7 @@ export default function HumidifierDemo() {
 
     if (statusRef.current) {
       statusRef.current.textContent = active ? "ON" : "OFF";
-      statusRef.current.style.color = active ? "var(--accent)" : "var(--ink-soft)";
+      statusRef.current.style.color = active ? "var(--accent-ink)" : "var(--ink-soft)";
     }
 
     if (!mistRef.current) return;
