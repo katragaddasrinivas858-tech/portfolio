@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #faf9f4;
+  --paper-raised: #efece2;
+  --paper-deep: #e3ded0;
+  --ink: #0b0b0c;
+  --ink-soft: #333129;
+  --ink-faint: #68645a;
+  --rule: #1e3ff0;
+  --rule-soft: rgba(30, 63, 240, 0.14);
+  --accent: #ff5a1f;
+  --accent-soft: rgba(255, 90, 31, 0.14);
+  /* Darker rust variant of --accent for text/icons directly on --paper — the
+     bright accent fails WCAG contrast as small text on the light ground, so
+     this is the accent's only legitimate on-paper text color. */
+  --accent-ink: #b8420e;
+  --highlight: #ffd400;
+  --highlight-soft: rgba(255, 212, 0, 0.28);
+  --hairline: var(--ink);
+  --hairline-strong: var(--ink);
+
+  --font-display: var(--font-archivo-black);
+  --font-sans: var(--font-grotesk);
+  --font-mono: var(--font-space-mono);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-highlight: var(--highlight);
+  --color-hairline: var(--hairline);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(11, 11, 12, 0.06) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--highlight);
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Brutalist building blocks: solid borders, hard offset shadows, no blur, no radius. */
+.brutal-border {
+  border: 3px solid var(--ink);
+}
+
+.brutal-border-thick {
+  border: 4px solid var(--ink);
+}
+
+.brutal-shadow {
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+.brutal-shadow-sm {
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+
+.brutal-shadow-lg {
+  box-shadow: 10px 10px 0 0 var(--ink);
+}
+
+.brutal-press {
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.brutal-press:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--ink);
+}
+
+.brutal-press:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brutal-press {
+    transition: none;
+  }
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rule);
+  font-weight: 700;
+}
+
+.kicker--accent {
+  color: var(--accent);
+}
+
+.kicker--faint {
+  color: var(--ink-faint);
+}
+
+.kicker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 2px solid var(--ink);
+}
+
+.kicker-chip--rule {
+  background: var(--rule);
+  color: var(--paper);
+}
+
+.kicker-chip--accent {
+  background: var(--accent);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.kicker-chip--highlight {
+  background: var(--highlight);
+  color: var(--ink);
+}
+
+.rule-line {
+  height: 3px;
+  background: var(--ink);
+  transform-origin: left center;
+}
+
+.rule-line--rule {
+  background: var(--rule);
+  height: 5px;
+}
+
+.rule-line--accent {
+  background: var(--accent);
+  height: 5px;
+}
+
+.rule-line--ink {
+  background: var(--ink);
+  height: 5px;
+}
+
+.tabular-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.reveal-card,
+.reveal-item {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.js-rule {
+  transform: scaleX(0);
+}
+
+.no-js .reveal-card,
+.no-js .reveal-item,
+.no-js .js-rule {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-card,
+  .reveal-item,
+  .js-rule {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
