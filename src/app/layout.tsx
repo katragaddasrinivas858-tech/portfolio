@@ -75,6 +75,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      // The no-js class is deliberately stripped by an inline script before
+      // hydration (see below) so JS users get the reveal-on-scroll starting
+      // state; that intentional client/server className mismatch is exactly
+      // what suppressHydrationWarning exists for.
+      suppressHydrationWarning
       className={`no-js ${archivoBlack.variable} ${grotesk.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <head>
