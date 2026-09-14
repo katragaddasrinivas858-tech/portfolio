@@ -46,3 +46,7 @@ next-env.d.ts
 .codex/
 .impeccable/
 skills-lock.json
+
+# Local source material (resume PDF, project notes) — not published; contains
+# personal info (e.g. phone number) that isn't otherwise on the public site
+/references/

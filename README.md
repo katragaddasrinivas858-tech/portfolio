@@ -42,8 +42,10 @@ src/
 ```
 
 All factual content (education, experience, projects, skills, achievements) lives in
-`src/content/resume.ts`, sourced from `references/Srinivas_Katragadda_Resume_finallllll.pdf`.
-Update that file to change what the site says — no content is hardcoded into page markup.
+`src/content/resume.ts`. Update that file to change what the site says — no content is
+hardcoded into page markup. Source material (resume PDF, project notes) is kept locally in
+`references/`, which is gitignored since it can contain personal details not otherwise on
+the public site (e.g. a phone number).
 
 ## Environment variables
 
