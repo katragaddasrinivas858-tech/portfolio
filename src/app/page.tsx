@@ -76,7 +76,7 @@ export default function Home() {
               <FindingCard kicker="METHOD" title="Current build" className="reveal-card">
                 <ul>
                   {builderRole.bullets.map((b) => (
-                    <li key={b}>{b}</li>
+                    <li key={b.headline}>{b.detail}</li>
                   ))}
                 </ul>
               </FindingCard>
@@ -108,12 +108,12 @@ export default function Home() {
               />
               {operatorRole.bullets.map((b, i) => (
                 <FindingCard
-                  key={b}
+                  key={b.headline}
                   kicker={i === 0 ? "SCOPE" : i === 1 ? "CYCLE" : "INFRASTRUCTURE"}
-                  title={b.split(",")[0].split(".")[0]}
+                  title={b.headline}
                   className="reveal-card"
                 >
-                  <p>{b}</p>
+                  <p>{b.detail}</p>
                 </FindingCard>
               ))}
               <Link
@@ -139,17 +139,17 @@ export default function Home() {
           <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
               <p className="kicker mb-4">BUILD BANK</p>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="brutal-shadow grid grid-cols-1 gap-[3px] border-[3px] border-rule bg-rule p-[3px] sm:grid-cols-2">
                 {builderReadings.map((r) => (
-                  <Reading key={r.label} reading={r} track="builder" />
+                  <Reading key={r.label} reading={r} track="builder" bordered={false} />
                 ))}
               </div>
             </div>
             <div>
               <p className="kicker mb-4">OPS BANK</p>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="brutal-shadow grid grid-cols-1 gap-[3px] border-[3px] border-accent bg-accent p-[3px] sm:grid-cols-2">
                 {operatorReadings.map((r) => (
-                  <Reading key={r.label} reading={r} track="operator" />
+                  <Reading key={r.label} reading={r} track="operator" bordered={false} />
                 ))}
               </div>
             </div>

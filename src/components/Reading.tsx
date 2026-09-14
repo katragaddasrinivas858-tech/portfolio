@@ -4,7 +4,14 @@ import { useEffect, useRef } from "react";
 import { animate, revealTrigger, prefersReducedMotion, EASE, DURATION_SLOW } from "@/lib/motion";
 import type { Reading as ReadingType } from "@/content/resume";
 
-export default function Reading({ reading, track }: { reading: ReadingType; track: "builder" | "operator" }) {
+type ReadingProps = {
+  reading: ReadingType;
+  track: "builder" | "operator";
+  /** When false, renders without its own border/shadow/background — for use inside a shared instrument panel. */
+  bordered?: boolean;
+};
+
+export default function Reading({ reading, track, bordered = true }: ReadingProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const valueRef = useRef<HTMLSpanElement>(null);
   const trackColor = track === "builder" ? "border-rule" : "border-accent";
@@ -40,10 +47,10 @@ export default function Reading({ reading, track }: { reading: ReadingType; trac
   }, [reading]);
 
   return (
-    <div ref={cardRef} className={`brutal-shadow-sm border-[3px] bg-ink p-5 ${trackColor}`}>
-      <p className={`kicker mb-3 flex items-center gap-2 ${track === "operator" ? "kicker--accent" : ""}`}>
-        {track === "builder" ? "BUILD READOUT" : "OPS READOUT"}
-      </p>
+    <div
+      ref={cardRef}
+      className={bordered ? `brutal-shadow-sm border-[3px] bg-ink p-5 ${trackColor}` : "bg-ink p-5"}
+    >
       <p className="tabular-mono text-3xl font-bold leading-none text-highlight sm:text-4xl">
         {reading.prefix}
         <span ref={valueRef}>0</span>

@@ -53,8 +53,14 @@ export type RoleEntry = {
   title: string;
   org: string;
   period: string;
-  bullets: string[];
+  bullets: RoleBullet[];
   track: "builder" | "operator";
+};
+
+export type RoleBullet = {
+  /** Short card title — always written explicitly, never derived from splitting the detail text. */
+  headline: string;
+  detail: string;
 };
 
 export const roles: RoleEntry[] = [
@@ -65,8 +71,15 @@ export const roles: RoleEntry[] = [
     period: "Jul 2026 – Present",
     track: "builder",
     bullets: [
-      "Co-building a product end-to-end as one of two developers, owning implementation across the frontend, backend, and database layers from initial architecture onward.",
-      "Currently supporting the team through the product's pitching phase ahead of public launch.",
+      {
+        headline: "Co-building a product end-to-end",
+        detail:
+          "Co-building a product end-to-end as one of two developers, owning implementation across the frontend, backend, and database layers from initial architecture onward.",
+      },
+      {
+        headline: "Supporting the pitching phase",
+        detail: "Currently supporting the team through the product's pitching phase ahead of public launch.",
+      },
     ],
   },
   {
@@ -76,12 +89,34 @@ export const roles: RoleEntry[] = [
     period: "Jul 2026 – Present",
     track: "operator",
     bullets: [
-      "Lead operations for a student tech community spanning seven domains — Competitive Programming, WebArcs, DataVerse, Design, Photography, Content, and PR — under the Directorate of Student Life.",
-      "Ran the AY 26–27 recruitment cycle, coordinating candidate communications across WhatsApp and email.",
-      "Built a Google Apps Script automation for new-member onboarding across all seven domains, generating Letters of Selection and routing welcome emails and WhatsApp group placement by domain.",
-      "Maintain operational infrastructure including Apps Script certificate pipelines and Notion-based ops boards.",
-      "Drive content and infrastructure for Meta Code Quest, a 10-chapter monthly coding hackathon series — producing event reports, social announcements, and certificate automation for each chapter.",
-      "Produced promotional and operational content for the Feature Forge ML workshop (~139 attendees), including a promotional reel and certificate mailer.",
+      {
+        headline: "Leads operations across seven domains",
+        detail:
+          "Lead operations for a student tech community spanning seven domains — Competitive Programming, WebArcs, DataVerse, Design, Photography, Content, and PR — under the Directorate of Student Life.",
+      },
+      {
+        headline: "Ran the AY 26–27 recruitment cycle",
+        detail: "Ran the AY 26–27 recruitment cycle, coordinating candidate communications across WhatsApp and email.",
+      },
+      {
+        headline: "Built cross-domain onboarding automation",
+        detail:
+          "Built a Google Apps Script automation for new-member onboarding across all seven domains, generating Letters of Selection and routing welcome emails and WhatsApp group placement by domain.",
+      },
+      {
+        headline: "Maintains operational infrastructure",
+        detail: "Maintain operational infrastructure including Apps Script certificate pipelines and Notion-based ops boards.",
+      },
+      {
+        headline: "Drives Meta Code Quest",
+        detail:
+          "Drive content and infrastructure for Meta Code Quest, a 10-chapter monthly coding hackathon series — producing event reports, social announcements, and certificate automation for each chapter.",
+      },
+      {
+        headline: "Produced content for Feature Forge",
+        detail:
+          "Produced promotional and operational content for the Feature Forge ML workshop (~139 attendees), including a promotional reel and certificate mailer.",
+      },
     ],
   },
 ];
@@ -120,14 +155,15 @@ export const projects: ProjectEntry[] = [
   {
     slug: "iot-smart-humidifier",
     name: "IoT Smart Humidifier",
-    stack: ["ESP32", "Blynk IoT", "C++"],
+    stack: ["ESP32", "DHT11", "WiFiManager", "Blynk IoT", "ArduinoOTA", "C++"],
     summary:
-      "ESP32-based automated humidifier with live telemetry — 3rd place at GITAM Tech Exhibition 2025.",
+      "ESP32-based automated humidifier with modular firmware and a water-level safety interlock — 3rd place at GITAM Tech Exhibition 2025.",
     award: "3rd Place — GITAM Tech Exhibition 2025 (200+ competing teams)",
     bullets: [
-      "Engineered an ESP32-based automated humidifier with real-time DHT11 sensor monitoring and threshold-based actuation.",
-      "Integrated Blynk IoT platform for remote control and live telemetry dashboards via mobile.",
-      "Implemented OTA firmware updates and NVS persistent storage, eliminating manual reconfiguration on restart.",
+      "Engineered an ESP32-based automated humidifier with a modular firmware split across four concerns — wifi_manager, sensor_manager, humidifier_control, and ota_update — orchestrated from main.cpp.",
+      "Built humidifier_control logic that reads real-time DHT11 humidity/temperature data and drives a relay-controlled mister actuator on threshold-based rules, gated by a float/water-level sensor as a safety interlock against dry-running.",
+      "Integrated the Blynk IoT platform for remote control and live telemetry, mapping device state across virtual pins V0–V7 to a mobile dashboard.",
+      "Implemented WiFiManager-based captive-portal provisioning and ArduinoOTA firmware updates, eliminating manual reconfiguration and physical reflashing in the field.",
       "Awarded 3rd Place at GITAM Tech Exhibition 2025, competing against 200+ teams.",
     ],
   },

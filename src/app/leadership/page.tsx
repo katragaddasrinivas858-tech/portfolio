@@ -55,19 +55,19 @@ export default function LeadershipPage() {
 
         {mdc.bullets.map((bullet, i) => (
           <FindingCard
-            key={bullet}
+            key={bullet.headline}
             kicker={["SCOPE", "RECRUITMENT", "AUTOMATION", "INFRASTRUCTURE", "CONTENT & OPS", "WORKSHOP SUPPORT"][i] ?? "OPS"}
-            title={bullet.split(",")[0].split(".")[0]}
+            title={bullet.headline}
             className="reveal-card"
           >
-            <p>{bullet}</p>
+            <p>{bullet.detail}</p>
           </FindingCard>
         ))}
       </RevealSection>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="brutal-shadow mt-12 grid grid-cols-1 gap-[3px] border-[3px] border-accent bg-accent p-[3px] sm:grid-cols-2 lg:grid-cols-4">
         {operatorReadings.map((r) => (
-          <Reading key={r.label} reading={r} track="operator" />
+          <Reading key={r.label} reading={r} track="operator" bordered={false} />
         ))}
       </div>
 
@@ -76,7 +76,7 @@ export default function LeadershipPage() {
         <FindingCard kicker="INTERNSHIP" title={inframiq.title} meta={`${inframiq.org} · ${inframiq.period}`} className="reveal-card">
           <ul>
             {inframiq.bullets.map((b) => (
-              <li key={b}>{b}</li>
+              <li key={b.headline}>{b.detail}</li>
             ))}
           </ul>
         </FindingCard>
